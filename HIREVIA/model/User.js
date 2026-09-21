@@ -1,6 +1,28 @@
 import mongoose from "mongoose";
 import bcrypt from "bcryptjs";
 
+const experienceSchema = new mongoose.Schema(
+    {
+        company: { type: String, trim: true },
+        title: { type: String, trim: true },
+        startDate: { type: Date },
+        endDate: { type: Date },
+        description: { type: String, trim: true },
+    },
+    { _id: false }
+);
+
+const educationSchema = new mongoose.Schema(
+    {
+        institution: { type: String, trim: true },
+        degree: { type: String, trim: true },
+        fieldOfStudy: { type: String, trim: true },
+        startDate: { type: Date },
+        endDate: { type: Date },
+    },
+    { _id: false }
+);
+
 const userSchema = new mongoose.Schema(
     {
         name: {
@@ -26,7 +48,34 @@ const userSchema = new mongoose.Schema(
             required: true,
 
         },
-    },
+        skills: {
+            type:[String],
+            default:[],
+        },
+
+        experience: {
+            type:[experienceSchema],
+            default:[],
+        },
+         education: {
+            type: [educationSchema],
+            default:[],
+         },
+         savedJobs: [
+        {
+        job: {
+         type: mongoose.Schema.Types.ObjectId,
+         ref: "Job",
+         required: true,
+         },
+
+         savedAt: {
+        type: Date,
+        default: Date.now,
+          },
+         },
+        ],
+        },
     { timestamps: true }
 
 );
