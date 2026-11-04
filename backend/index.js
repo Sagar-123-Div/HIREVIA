@@ -15,7 +15,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: process.env.CLIENT_URL || "http://localhost:5173",
+    origin: process.env.CLIENT_URL || "https://hirevia-frontend.onrender.com",
   })
 );
 app.use(json());
