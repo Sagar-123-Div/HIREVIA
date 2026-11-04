@@ -1,5 +1,5 @@
 import Navbar from '../component/Navbar';
-import Footer from '../component/footer';
+import Footer from '../component/Footer';
 
 const features = [
   {
