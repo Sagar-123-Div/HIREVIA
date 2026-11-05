@@ -18,6 +18,7 @@ app.use(
     origin: [
       process.env.CLIENT_URL,
       "https://hirevia-frontend.onrender.com",
+      "https://hirevia-frontend-job.onrender.com",
     ].filter(Boolean),
   })
 );
