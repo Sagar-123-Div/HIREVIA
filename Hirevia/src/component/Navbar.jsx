@@ -19,6 +19,7 @@ export default function Navbar() {
         {!isLoggedIn && (
           <>
             <a href="/login" className="hover:text-blue-400">Login </a>
+            <a href="/recruiter/dashboard" className="hover:text-blue-400">Recruiter portal</a>
           </>
         )}
 

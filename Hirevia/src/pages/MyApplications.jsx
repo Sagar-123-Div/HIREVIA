@@ -34,6 +34,9 @@ function getStatusStyle(status = "pending") {
   if (normalized === "accepted") {
     return "border border-emerald-500/30 bg-emerald-500/10 text-emerald-400";
   }
+  if (normalized === "considered") {
+    return "border border-emerald-500/30 bg-emerald-500/10 text-emerald-400";
+  }
   if (normalized === "rejected") {
     return "border border-rose-500/30 bg-rose-500/10 text-rose-400";
   }
@@ -165,8 +168,8 @@ export default function MyApplications() {
   const pendingCount = applicationSummary?.pending ?? applications.filter(
     (app) => (app.status || "pending").toLowerCase() === "pending"
   ).length;
-  const acceptedCount = applicationSummary?.accepted ?? applications.filter(
-    (app) => (app.status || "").toLowerCase() === "accepted"
+  const consideredCount = applicationSummary?.considered ?? applicationSummary?.accepted ?? applications.filter(
+    (app) => ["considered", "accepted"].includes((app.status || "").toLowerCase())
   ).length;
   const rejectedCount = applicationSummary?.rejected ?? applications.filter(
     (app) => (app.status || "").toLowerCase() === "rejected"
@@ -223,7 +226,7 @@ export default function MyApplications() {
               {[
                 ["Total Applied", totalCount, "text-white"],
                 ["Pending", pendingCount, "text-[#00e5ff]"],
-                ["Accepted", acceptedCount, "text-emerald-400"],
+                ["Considered", consideredCount, "text-emerald-400"],
                 ["Rejected", rejectedCount, "text-rose-400"],
               ].map(([label, count, color]) => (
                 <div
@@ -275,7 +278,7 @@ export default function MyApplications() {
 
             <div className="mb-6 flex flex-wrap items-center justify-between gap-4 border-b border-[#162238] pb-4">
               <div className="flex flex-wrap gap-2">
-                {["All", "pending", "accepted", "rejected"].map((status) => (
+                {["All", "pending", "considered", "rejected"].map((status) => (
                   <button
                     key={status}
                     type="button"

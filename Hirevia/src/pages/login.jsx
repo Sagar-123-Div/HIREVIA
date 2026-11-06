@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { loginUser } from "../Service/Login";
+import { getRoleGroup } from "../utils/authRole";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -19,6 +20,14 @@ export default function Login() {
 
     if (!result.success) {
       setError(result.message);
+      setLoading(false);
+      return;
+    }
+
+    if (getRoleGroup(result.user) !== "candidate") {
+      localStorage.removeItem("token");
+      localStorage.removeItem("user");
+      setError("This is not a job seeker account. Please use the recruiter portal.");
       setLoading(false);
       return;
     }
